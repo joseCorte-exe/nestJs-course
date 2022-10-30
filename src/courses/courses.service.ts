@@ -1,5 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { Body, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { UpdateCourseDto } from './dto/update-course.dto';
 import { Course } from './entities/course.entity';
 
 export type createCourseType = {
@@ -70,7 +71,7 @@ export class CoursesService {
     description,
     instructor,
     tags
-  }: createCourseType) {
+  }: UpdateCourseDto) {
     const request = {
       name,
       description,
@@ -78,6 +79,8 @@ export class CoursesService {
       tags
     }
     const indexCourse = this.courses.findIndex(course => course.id === id)
+
+    return indexCourse
 
     this.courses[indexCourse] = request
   }
