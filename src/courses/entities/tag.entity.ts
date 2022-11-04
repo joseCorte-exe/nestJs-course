@@ -1,5 +1,5 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Course } from "./course.entity";
+import { Courses } from "./courses.entity";
 
 @Entity()
 export class Tag {
@@ -9,7 +9,7 @@ export class Tag {
   @Column()
   name: string
 
-  @ManyToMany(() => Course, course => course.tags)
+  @ManyToMany(() => Courses, course => course.tags)
   @JoinTable()
-  course: Course[]
+  course: Courses[]
 }

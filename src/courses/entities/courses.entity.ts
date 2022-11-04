@@ -2,7 +2,7 @@ import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "t
 import { Tag } from "./tag.entity";
 
 @Entity()
-export class Course {
+export class Courses {
   @PrimaryGeneratedColumn()
   id?: number;
 

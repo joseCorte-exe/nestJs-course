@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
-import { Course } from './entities/course.entity';
+import { Courses } from './entities/courses.entity';
 import { Tag } from './entities/tag.entity';
 
 export type createCourseType = {
@@ -28,17 +28,19 @@ export class CoursesService {
   // ]
 
   constructor(
-    @InjectRepository(Course)
-    private readonly courseRepository: Repository<Course>,
+    @InjectRepository(Courses)
+    private readonly courseRepository: Repository<Courses>,
 
-    @InjectRepository(Course)
+    @InjectRepository(Courses)
     private readonly tagRepository: Repository<Tag>
   ) {}
 
   async findAll() {
     return {
       message: 'courses listed with success',
-      result: await this.courseRepository.find()
+      result: await this.courseRepository.find({
+        relations: ['tags']
+      })
     }
   }
 
@@ -46,7 +48,8 @@ export class CoursesService {
     const course = await this.courseRepository.findOne({
       where: {
         id: Number(id)
-      }
+      },
+      relations: ['tags']
     })
 
     if (!course)
