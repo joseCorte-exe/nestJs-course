@@ -23,4 +23,16 @@ services:
       - .docker/dbdata:/var/lib/postgres/data
     environment:
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=nest
+      - POSTGRES_DB=nestdb
+
+pgadmin:
+  image: dpage/gdadmin4
+  container_name: cursonestjs-pgadmin
+  tty: true
+  environment:
+    - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+    - PGADMIN_DEFAULT_PASSWORD=admin
+  ports:
+    - "8000:80"
+  depends_on:
+    - db

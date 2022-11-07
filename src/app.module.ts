@@ -8,13 +8,13 @@ import { CoursesModule } from './courses/courses.module';
 @Module({
   imports: [CoursesModule, TypeOrmModule.forRoot({
     type: 'postgres',
-    host: 'localhost',
+    host: 'db',
     port: 5432,
     username: 'postgres',
     password: 'docker',
-    database: 'postgres',
+    database: 'nestdb',
     autoLoadEntities: true,
-    synchronize: true
+    synchronize: false
   })],
   controllers: [AppController],
   providers: [AppService],
