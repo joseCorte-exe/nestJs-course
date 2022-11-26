@@ -1,8 +1,8 @@
-version: '3'
+version: '3.7'
 
 services:
   app:
-    build: ./Dockerfile
+    build: .
     entrypoint: .docker/entrypoint.sh
     container_name: nestjs-devtraining
     ports:
@@ -13,7 +13,7 @@ services:
       - db
 
   db:
-    build: .docker/postgres
+    build: .docker/postgres/
     container_name: nestjs-devtraining-db
     restart: always
     tty: true
