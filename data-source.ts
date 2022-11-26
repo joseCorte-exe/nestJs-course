@@ -7,6 +7,6 @@ export const AppDataSource = new DataSource({
   username: 'postgres',
   password: 'docker',
   database: 'nestdb',
-  entities: ['dist/**/*.entity.js'],
-  migrations: ['dist/src/migrations/*.js'],
+  entities: ['./dist/**/*.entity.js'],
+  migrations: ['./dist/migrations/*.js'],
 });
