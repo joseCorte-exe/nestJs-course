@@ -6,16 +6,20 @@ import { AppService } from './app.service';
 import { CoursesModule } from './courses/courses.module';
 
 @Module({
-  imports: [CoursesModule, TypeOrmModule.forRoot({
-    type: 'postgres',
-    host: 'db',
-    port: 5432,
-    username: 'postgres',
-    password: 'docker',
-    database: 'nestdb',
-    autoLoadEntities: true,
-    synchronize: false
-  })],
+  imports: [
+    CoursesModule,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'db',
+      port: 5432,
+      username: 'postgres',
+      password: 'docker',
+      database: 'nestdb',
+      autoLoadEntities: false,
+      entities: [__dirname + '/**/*.entity.ts'],
+      synchronize: false,
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
