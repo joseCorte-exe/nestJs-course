@@ -19,10 +19,10 @@ export type createCourseType = {
 export class CoursesService {
   constructor(
     @InjectRepository(Courses)
-    private readonly courseRepository: Repository<Courses>,
+    private courseRepository: Repository<Courses>,
 
-    @InjectRepository(Courses)
-    private readonly tagRepository: Repository<Tag>,
+    @InjectRepository(Tag)
+    private tagRepository: Repository<Tag>,
   ) {}
 
   async findAll() {
@@ -59,6 +59,8 @@ export class CoursesService {
       ...createCourseDto,
       tags,
     });
+
+    console.log(request);
 
     return this.courseRepository.save(request);
   }

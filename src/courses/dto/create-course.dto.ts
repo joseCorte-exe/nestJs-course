@@ -1,4 +1,4 @@
-import { IsString } from "class-validator";
+import { IsString } from 'class-validator';
 
 export class CreateCourseDto {
   @IsString()
@@ -11,5 +11,5 @@ export class CreateCourseDto {
   readonly tags: Array<string>;
 
   @IsString()
-  readonly instructor: string
+  readonly instructor: string;
 }

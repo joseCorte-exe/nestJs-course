@@ -5,7 +5,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
-  PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn
 } from 'typeorm';
 import { Courses } from './courses.entity';
 
@@ -20,16 +20,18 @@ export class Tag {
   name: string;
 
   @ManyToMany(() => Courses, (course) => course.tags)
-  @JoinTable()
+  @JoinTable({ name: 'courses_tags' })
   course: Courses[];
 
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 
-  @BeforeInsert()
-  generatedId() {
-    if (this.id) return;
+  getId() {
+    return this.id || uuidv4();
+  }
 
-    this.id = uuidv4();
+  @BeforeInsert()
+  setId() {
+    this.id = this.getId();
   }
 }

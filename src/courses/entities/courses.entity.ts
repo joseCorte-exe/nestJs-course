@@ -5,16 +5,15 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
-  PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn
 } from 'typeorm';
 import { Tag } from './tag.entity';
 
 import { v4 as uuidv4 } from 'uuid';
-
 @Entity()
 export class Courses {
-  @PrimaryGeneratedColumn()
-  id?: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
@@ -28,16 +27,19 @@ export class Courses {
   @ManyToMany(() => Tag, (tag) => tag.course, {
     cascade: true,
   })
-  @JoinTable()
-  tags: Array<string>;
+  @JoinTable({ name: 'courses_tags' })
+  tags: string[];
 
   @CreateDateColumn({ type: 'timestamp' })
   created_at: Date;
 
-  @BeforeInsert()
-  generatedId() {
-    if (this.id) return;
+  getId() {
+    return this.id || uuidv4();
+  }
 
-    this.id = uuidv4();
+  @BeforeInsert()
+  setId() {
+    this.id = this.getId();
+    console.log(this.id);
   }
 }

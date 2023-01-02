@@ -16,7 +16,7 @@ import { CoursesModule } from './courses/courses.module';
       password: 'docker',
       database: 'nestdb',
       autoLoadEntities: false,
-      entities: [__dirname + '/**/*.entity.ts'],
+      entities: [__dirname + '/**/*.entity.js'],
       synchronize: false,
     }),
   ],
