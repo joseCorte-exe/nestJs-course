@@ -60,8 +60,6 @@ export class CoursesService {
       tags,
     });
 
-    console.log(request);
-
     return this.courseRepository.save(request);
   }
 
