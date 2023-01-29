@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   BeforeInsert,
   Column,
@@ -10,6 +11,7 @@ import {
 import { Tag } from './tag.entity';
 
 import { v4 as uuidv4 } from 'uuid';
+
 @Entity()
 export class Courses {
   @PrimaryGeneratedColumn('uuid')
@@ -40,6 +42,5 @@ export class Courses {
   @BeforeInsert()
   setId() {
     this.id = this.getId();
-    console.log(this.id);
   }
 }

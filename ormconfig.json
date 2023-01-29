@@ -7,6 +7,7 @@
   "database": "postgres",
   "entities": ["dist/**/*.entity.js"],
   "migrations": ["dist/migrations/*.js"],
+  "emitDecoratorMetadata": true,
   "cli": {
     "migrationsDir": "src/migrations"
   }

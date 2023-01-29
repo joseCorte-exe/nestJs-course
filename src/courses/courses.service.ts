@@ -1,6 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 
-import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
@@ -18,10 +17,10 @@ export type createCourseType = {
 @Injectable()
 export class CoursesService {
   constructor(
-    @InjectRepository(Courses)
+    @Inject('COURSES_REPOSITORY')
     private courseRepository: Repository<Courses>,
 
-    @InjectRepository(Tag)
+    @Inject('TAGS_REPOSITORY')
     private tagRepository: Repository<Tag>,
   ) {}
 
@@ -37,7 +36,7 @@ export class CoursesService {
   async findOne(id: string) {
     const course = await this.courseRepository.findOne({
       where: {
-        id: String(id),
+        id: id as string,
       },
       relations: ['tags'],
     });
@@ -84,7 +83,7 @@ export class CoursesService {
   async remove(id: string) {
     const course = await this.courseRepository.findOne({
       where: {
-        id: String(id),
+        id: id as string,
       },
     });
 

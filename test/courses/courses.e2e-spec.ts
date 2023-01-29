@@ -11,6 +11,7 @@ describe('Courses: /courses e2e', () => {
   const course = {
     name: 'Nestjs w/ typeorm',
     description: 'Creating apis restful com nestjs',
+    instructor: 'me',
     tags: ['nestjs', 'typeorm', 'nodejs', 'typescript']
   }
 
@@ -49,7 +50,16 @@ describe('Courses: /courses e2e', () => {
   it('/ (POST)', () => {
     return request(app.getHttpServer())
       .post('/courses')
-      .send(course as CreateCourseDto)
+      .send(course as CreateCourseDto) 
       .expect(HttpStatus.CREATED)
+      .then(({ body }) => {
+        const expectedCourse = jasmine.objectContaining({
+          ...course,
+          tags: jasmine.arrayContaining(
+            course.tags.map((name) => jasmine.objectContaining({ name }))
+          )
+        })
+        expect(body).toEqual(expectedCourse)
+      })
   });
 });
